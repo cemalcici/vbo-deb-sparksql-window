@@ -1,3 +1,5 @@
 notebooks/datasets/
 notebooks/.ipynb_checkpoints/
 notebooks/spark-warehouse/
+.DS_Store
+00_iceberg_homework_solution/
