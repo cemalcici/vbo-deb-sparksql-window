@@ -1,0 +1,15 @@
+# SparkSQL Window Functions demosu: yalnızca Spark + JupyterLab.
+services:
+  spark:
+    container_name: spark-window
+    # Bu makinede build edildi. Yoksa "docker compose up -d --build" image/ altındaki Dockerfile'dan kurar
+    # (yayınlanan platform imajı yalnızca amd64; Apple Silicon'da emülasyonla Jupyter kernel'i kilitleniyor).
+    image: vbo-pyspark:4.1.3_python-3.12_java21
+    build: ./image
+    ports:
+      - "127.0.0.1:8888:8888"   # JupyterLab (token yok, yalnızca bu makineden)
+      - "127.0.0.1:4040:4040"   # Spark UI
+    volumes:
+      - ./notebooks:/opt/examples
+    working_dir: /opt/examples
+    command: jupyter lab --ip 0.0.0.0 --port 8888 --allow-root --no-browser --ServerApp.token='' --ServerApp.password=''
